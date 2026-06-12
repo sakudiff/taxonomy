@@ -1,0 +1,123 @@
+% !TEX program = pdflatex
+\documentclass[10pt]{article}
+
+% Packages
+\usepackage[letterpaper, margin=0.9in, bottom=0.85in]{geometry}
+\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{enumitem}
+
+% Formatting
+\titleformat{\section}{\normalsize\bfseries}{}{0em}{}[\vspace{-0.15em}\hrule\vspace{0.25em}]
+\titlespacing*{\section}{0pt}{0.4em}{0.1em}
+\pagestyle{empty}
+
+\begin{document}
+
+%
+% TITLE AREA
+%
+\begin{center}
+    {\Large\bfseries Philippine Industrial Taxonomy}\\[1pt]
+    {\normalsize\bfseries Executive Summary}\\[4pt]
+    {\small\itshape Quantifying Structural Vulnerability via K-Means Clustering of Philippine Industries}\\[7pt]
+    {\small Divina, Cuevas, \& Sison (2025) --- De La Salle University, Manila}
+\end{center}
+
+\vspace{0.3em}
+
+%
+% PROBLEM
+%
+\section*{The Problem}
+
+Micro, small, and medium enterprises (MSMEs) account for \textbf{99.5\%} of all registered establishments in the Philippines and generate the majority of employment. Successive administrations have pursued uniform policies targeting this bloc, treating a subsistence sari-sari store and a scalable technology startup as equivalent entities under identical regulatory and credit frameworks.
+
+This uniformity is rooted in a deeper analytical failure. The Philippine Standard Industrial Classification (PSIC) groups industries by product output, not by how they operate. A micro-bakery and a semiconductor fabricator both fall under ``Manufacturing'' despite fundamentally different capital structures, labor profiles, and resilience to economic shocks. The classification system obscures what the World Bank calls the \textbf{``missing middle''}: a hollowed-out industrial structure where a vast base of hyper-fragile micro-enterprises coexists with a thin layer of conglomerates, with little in between.
+
+The result is that structure, not sector, determines an industry's vulnerability. When policymakers cannot see structural differences, support measures miss their targets, credit programs fail to reach scalable firms, and entire sectors collapse under systemic stress. The core problem is not merely inadequate support for MSMEs --- it is a \textbf{misclassification of the economy itself}.
+
+\vspace{0.2em}
+\hrule
+\vspace{0.25em}
+
+%
+% APPROACH
+%
+\section*{The Approach}
+
+This study constructs a data-driven industrial taxonomy using unsupervised machine learning on \textbf{Philippine Statistics Authority's 2021 Census of Establishments} data. The unit of analysis is the three-digit PSIC industry group, yielding \textbf{228 industries}. For each industry, three structural features were engineered to capture firm-size distribution: \textbf{average firm size} (total employment divided by total establishments), \textbf{SME density} (proportion of firms with 10--199 employees), and \textbf{large-firm density} (proportion with 200+ employees). This three-feature model avoids the perfect collinearity that would arise from including all four MSME size bins.
+
+\textbf{K-Means clustering} was applied to the standardized feature space. The optimal $k = 4$ was selected through dual-protocol validation: the Elbow Method identified an inflection point at $k = 4$, while the Silhouette Coefficient ($0.4946$) confirmed meaningful separation. A higher score at $k = 2$ was rejected in favor of structural resolution, because a binary classification would reproduce the aggregation bias the taxonomy aims to correct.
+
+The taxonomy was validated through \textbf{four robustness checks}: (1) bootstrapped cluster stability across 50 random seeds (mean Adjusted Rand Index = \textbf{0.97}); (2) K-Medoids preserving the four-archetype structure (ARI = \textbf{0.86}); (3) ANOVA confirming cluster means differ significantly on firm size and entropy ($p < 0.001$); and (4) model comparison showing a single cluster-based predictor outperforms a saturated PSIC-dummy model without overfitting. All analysis used \textbf{Python} and \textbf{scikit-learn}.
+
+\vspace{0.2em}
+\hrule
+\vspace{0.25em}
+
+%
+% KEY FINDINGS
+%
+\section*{Key Findings}
+
+\paragraph{The Four Archetypes.} The Philippine economy segments into four distinct structural archetypes:
+
+\begin{itemize}[nosep]
+    \item \textbf{Survivalist} (103 industries, avg. \textbf{10} emp., $H \approx 0.41$). Hyper-fragile structural monoculture of micro-enterprises with near-zero SME or large-firm presence. Trapped in a low-productivity equilibrium.
+    \item \textbf{Middle} (90 industries, avg. \textbf{46} emp., $H \approx 0.89$). Growth engines partially escaped from micro-dominance. The policy-accessible ``missing middle'' --- firms with scale for targeted credit and value-chain integration.
+    \item \textbf{Transition} (31 industries, avg. \textbf{175} emp., $H \approx 1.18$). Highest structural diversity, demonstrating capacity to graduate from SME to large-firm scale.
+    \item \textbf{Oligopoly} (4 industries, avg. \textbf{823} emp., $H \approx 1.13$). Capital-intensive apex sectors (semiconductors, aerospace, HR pooling). Operationally independent of local credit constraints, structurally narrow.
+\end{itemize}
+
+\paragraph{Structure Predicts Failure.} A bivariate OLS regression of pandemic-era business closures on Survivalist industry share yields \textbf{r = 0.44} ($p = 0.068$, $n = 18$). Sectors with 100\% Survivalist composition (Accommodation and Food Service, Other Services) suffered the highest closure rates, while Electricity and Gas (0\% Survivalist) demonstrated anti-fragility. This suggests structural fragility is a measurable predictor of vulnerability to systemic shock.
+
+\paragraph{The Survivalist Trap.} Once micro-enterprise density exceeds \textbf{80\%}, average firm size hits a structural glass ceiling near \textbf{10} employees. The economy is \textbf{bimodal}: industries are either hyper-fragile micro-agglomerations or capital-intensive oligopolies, with a sparsely populated transition zone. This ``Structural Dualism'' is the graphical signature of the missing middle.
+
+\paragraph{Regional Risk Compression.} Structural risk scores across all \textbf{17} regions range from \textbf{0.93 to 0.95} --- nationwide structural fragility. Even the National Capital Region (0.934) is underpinned by a massive informal service economy. Peripheral regions like Zamboanga Peninsula (0.951) exhibit near-total Survivalist dependence.
+
+\vspace{0.2em}
+\hrule
+\vspace{0.25em}
+
+%
+% POLICY IMPLICATIONS
+%
+\section*{Policy Implications}
+
+The taxonomy provides an empirical basis for replacing uniform MSME policy with \textbf{archetype-specific interventions}. Each archetype faces fundamentally different constraints:
+
+\begin{itemize}[nosep]
+    \item \textbf{Survivalist:} Social safety nets, micro-finance, and core infrastructure. Traditional business-development programs are inappropriate for firms averaging 10 employees.
+    \item \textbf{Middle:} Value-chain integration, supplier development, and scale-up finance. These firms represent the highest-return targets for credit and capacity-building.
+    \item \textbf{Transition:} Growth capital and innovation finance --- equity financing, export guarantees, technology adoption subsidies.
+    \item \textbf{Oligopoly:} Competition oversight rather than subsidy. Policy should focus on regulatory governance, market-entry barriers, and backward-linkage requirements.
+\end{itemize}
+
+Operationally, the taxonomy should be embedded into \textbf{DTI, SB Corporation, and BSP} targeting systems, so budget allocation, credit programs, and crisis support use structural risk scores rather than PSIC sections or asset brackets. Future MSME laws should recognize structural vulnerability as a policy variable, mandating periodic recomputation of clusters and tying national development goals to measurable shifts in Middle and Transition archetype shares.
+
+\vspace{0.2em}
+\hrule
+\vspace{0.25em}
+
+%
+% DATA & METHODS NOTE
+%
+\section*{Data \& Methods Note}
+
+All data from the \textbf{PSA 2021 Census of Establishments} (Tables 3, 5, 2, 9).\newline Analysis in \textbf{Python 3.11} (pandas, numpy, scikit-learn, statsmodels, matplotlib, seaborn). Full reproducible pipeline in Jupyter notebook (\texttt{main.ipynb}) with \texttt{requirements.txt}. Source data in \texttt{data/}. Complete paper at \texttt{main.pdf}. Divina, Cuevas, \& Sison (2025).\newline Repository: \texttt{github.com/sakudiff/philippine-industrial-taxonomy}.
+
+\vspace{0.15em}
+\hrule
+\vspace{0.15em}
+
+%
+% AUTHORS
+%
+\section*{About the Authors}
+
+Econometric capstone project at De La Salle University, Manila. \textbf{Precious Mae M. Divina}: conceptualization, investigation, writing, project administration. \textbf{Gheann Christie M. Cuevas}: validation, editorial review. \textbf{Aaron Joshua E. Sison}: methodology, software, formal analysis, visualization. Correspondence: \texttt{precious\_divina@dlsu.edu.ph}.
+
+\end{document}

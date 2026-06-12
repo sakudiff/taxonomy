@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: "An Econometric Taxonomy for Policy: Quantifying Structural Vulnerability via K-Means Clustering of Philippine Industries"
+message: "If you use this software or research in your work, please cite it using the following metadata."
+type: software
+authors:
+  - family-names: "Divina"
+    given-names: "Precious Mae M."
+    affiliation: "De La Salle University"
+  - family-names: "Cuevas"
+    given-names: "Gheann Christie M."
+    affiliation: "De La Salle University"
+  - family-names: "Sison"
+    given-names: "Aaron Joshua E."
+    affiliation: "De La Salle University"
+    orcid: "https://orcid.org/0000-0002-3380-7238"
+repository-code: "https://github.com/sakudiff/philippine-industrial-taxonomy"
+date-released: 2025-03-21
+keywords:
+  - "industrial taxonomy"
+  - "k-means clustering"
+  - "Philippine economy"
+  - "MSME"
+  - "structural vulnerability"
+  - "economic policy"
+license: "MIT"
