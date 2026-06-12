@@ -25,9 +25,10 @@ Our K-Means model ($k=4$) identifies four distinct structural groups:
 
 ## Repository Structure
 *   `main.ipynb`: Full end-to-end data pipeline, clustering model, and visualization suite.
-*   `main.pdf`: The complete research paper detailing the econometric methodology.
+*   `main.pdf`: The complete research paper detailing the econometric methodology (available at root for convenience).
 *   `data/`: PSA 2021 source datasets (Employment, Establishments, Closures).
 *   `images/`: High-resolution figures used in the paper.
+*   `paper/`: LaTeX source documents, ACM stylesheets, and configuration files for compiling the paper.
 
 ## Requirements
 This project uses `uv` for dependency management. To reproduce the analysis:
