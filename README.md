@@ -6,8 +6,6 @@
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikit-learn&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 ![UV](https://img.shields.io/badge/package%20manager-uv-6C5CE7)
-![arXiv](https://img.shields.io/badge/arXiv-XXXX.XXXXX-red)
-![Research](https://img.shields.io/badge/status-peer--reviewed-important)
 ![ACM](https://img.shields.io/badge/format-ACM%20dual--column-007B83)
 
 A data-driven industrial taxonomy revealing that structure, not sector, determines economic resilience in the Philippines.
